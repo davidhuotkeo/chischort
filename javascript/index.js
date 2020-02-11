@@ -5,22 +5,41 @@ var detail = $('.topdetail');
 var contactWrapper = $('.contact');
 var contact = $('.contact > p');
 var contactLink = $('.contact-link');
+var loader = $('.preloader');
 
-logo.transition({
+let delayTime = 3000;
+
+var firstTime = localStorage.getItem("first_time");
+if(firstTime) {
+  delayTime = 0;
+  localStorage.setItem("first_time", false);
+} else {
+  localStorage.setItem("first_time", true);
+  loader
+  .transition({
+    display: 'block'
+  },10)
+  .delay(delayTime)
+  .transition({
+    display: 'none'
+  }, 10);
+}
+
+logo.delay(delayTime).transition({
     opacity: 1,
     transform: 'translate(0, 0)'
 }, 1500);
 
-soon.transition({
+soon.delay(delayTime).transition({
     opacity: 1,
     transform: 'translate(0, 0)'
 }, 2000);
 
-yellowRoad.animate({
+yellowRoad.delay(delayTime).animate({
     width: '100vw'
 }, 1500);
 
-detail.transition({
+detail.delay(delayTime).transition({
     opacity: 1,
     transform: 'translate(0, 0)'
 }, 2000);
@@ -32,7 +51,7 @@ contact.click(function (e) {
     contactLink.toggle('slide:right');
 });
 
-contact.hover(function () {
+contact.delay(delayTime).hover(function () {
         $(this).css({
             'background-color': '#feb16b',
             'color': '#3d3d3d'
